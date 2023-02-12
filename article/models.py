@@ -1,12 +1,17 @@
-""" docs """
+""" 
+Artilce model is written with custom fields.
+Note that django built in User model is used 
+for user registration
+"""
 from django.db import models
 from django.contrib.auth.models import User
 
 
-# Create your models here.
+# Custom Article model
 class Article(models.Model):
     """Article model with slug included for use
-    in signals, views, urls and article-detail page
+    in signals, views, urls and article-detail page.
+    Slug is passed as title in article-detail page.
     """
 
     title = models.CharField(max_length=200)

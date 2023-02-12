@@ -2,36 +2,43 @@
 
 
 {% block style %}
-<style>
-  .link-style {
-    text-decoration: none;
-    color: black;
-  }
+  <style>
+    .link-style {
+      text-decoration: none;
+      color: black;
+    }
 
-  .link-style:hover {
-    text-decoration: none;
-    color: gray;
-  }
-</style>
+    .link-style:hover {
+      text-decoration: none;
+      color: gray;
+    }
+  </style>
 {% endblock style %}
 
 
 {% block title %}
+  PowerBlog- All Articles
 {% endblock title %}
 
 
 {% block body %}
-<div class="container mt-4">
-  {% for article in articles %}
-  <span class="badge rounded-pill bg-success">
-    Author: {{ article.author }}
-  </span>
-  <h1>
-    <a href="{% url 'article_detail' article.slug %}" class="link-style">
-      {{ article.title }}
-    </a>
-  </h1>
-  {% endfor %}
-</div>
+  <div class="container mt-5">
+    {% for article in articles %}
+      <div class="card border-info mb-3">
+        <div class="card-header">
+          <span class="badge rounded-pill bg-success">
+            Author: {{ article.author }}
+          </span>
+        </div>
+        <div class="card-body">
+          <h4>
+            <a href="{% url 'article_detail' article.slug %}" class="link-style">
+              {{ article.title }}
+            </a>
+          </h4>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
 {% endblock body %}
 

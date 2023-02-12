@@ -6,8 +6,6 @@ from .models import Article
 
 
 # Dynamic slug with signals, first indicate reciever
-
-
 @receiver(pre_save, sender=Article)
 def add_slug(instance, *args, **kwargs):
     """get slug in url on click article title.
