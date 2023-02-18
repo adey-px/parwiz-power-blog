@@ -116,6 +116,12 @@ USE_L10N = True
 USE_TZ = True
 
 
+# Optional: If use djnago built in login
+# Required vars with appr view names
+LOGIN_REDIRECT_URL = 'article_page'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 

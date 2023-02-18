@@ -1,4 +1,3 @@
-""" docs """
 from django.apps import AppConfig
 
 

@@ -1,12 +1,18 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 
 {% block style %}
+  <style>
+    .none-empty {
+      color: orangered;
+    }
+  </style>
 {% endblock style %}
 
 
 {% block title %}
-  User Login
+  Login Page
 {% endblock title %}
 
 
@@ -15,14 +21,21 @@
     <h3 class="text-center mt-5">
       User Login
     </h3>
-    <p class="text-center">
-      Fill this form to login
-    </p>
 
-    <div class="row mt-5">
-      <div class="col-md-6 offset-md-3 ">
+    {% if form.errors %}
+      <p class="none-empty">
+        Oops! required fields can't be empty
+      </p>
+    {% else %}
+      <p class="text-center">
+        Fill this form to login
+      </p>
+    {% endif %}
+
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
         <form action="" method="post" novalidate>
-          {{ form.as_p }}
+          {{ form | crispy }}
           {% csrf_token %}
           <div class="d-grid gap-2 col-12 mx-auto">
             <input type="submit" value="Login" 
@@ -30,7 +43,13 @@
             >
           </div>
         </form>
-      </div> 
+      </div>
     </div>
   </div>
 {% endblock body %}
+
+
+<!-- 
+Note that crispy forms have built in
+form.errors to handle field errors
+-->

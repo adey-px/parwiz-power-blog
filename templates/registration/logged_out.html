@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+{% block style %}
+  <style>
+    .none-empty {
+      color: orangered;
+    }
+  </style>
+{% endblock style %}
+
+
+{% block title %}
+{% endblock title %}
+
+
+{% block body %}
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-md-6 mx-auto">
+        <p>You have logged out</p>
+        <h5>Click <a href="{% url 'user_login' %}" 
+          class="link-style">
+          here</a> to login again
+        </h5>
+      </div>
+    </div>
+  </div>
+{% endblock body %}

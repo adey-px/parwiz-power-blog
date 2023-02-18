@@ -24,16 +24,28 @@ class UserRegistration(forms.ModelForm):
     using built in django User model
     """
 
-    password1 = forms.CharField(label="Password", widget=forms.PasswordInput)
-    password2 = forms.CharField(label="Confirm Password", widget=forms.PasswordInput)
+    password = forms.CharField(label="Password", widget=forms.PasswordInput)
+    conf_password = forms.CharField(
+        label="Confirm Password", widget=forms.PasswordInput
+    )
 
     class Meta:
         model = User
         fields = ("first_name", "last_name", "username", "email")
 
-    def clean_password_2(self):
+    def clean_conf_password(self):
         checker = self.cleaned_data
-        if checker["password1"] != checker["password2"]:
-            raise forms.ValidationError("Oops! passwords failed to match")
+        if checker["password"] != checker["conf_password"]:
+            raise forms.ValidationError("Oops! passwords do not to match")
 
-        return checker["password2"]
+        return checker["conf_password"]
+
+
+"""
+Forms in django involves just creating form fields,
+and insert them within html form tags in templates
+
+Crispy forms have some built in properties like 
+.cleaned_data, .errors, .ValidationError, and
+built in form validation, etc  
+"""
