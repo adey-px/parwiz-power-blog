@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 
 
-{% block title %}
-{% endblock title %}
+{% block extra_title %}
+{% endblock extra_title %}
 
 
-{% block style %}
-{% endblock style %}
+{% block extra_style %}
+{% endblock extra_style %}
 
 
-{% block body %}
+{% block body_content %}
   <div class="container mt-4">
     <h1>{{ article.title }}</h1>
     <h6>Published on {{ article.published }} 
@@ -18,4 +18,4 @@
     <hr>
     <p>{{ article.description }}</p>
   </div>
-{% endblock body %}
+{% endblock body_content %}

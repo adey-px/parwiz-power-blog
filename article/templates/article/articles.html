@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 
-{% block style %}
+{% block extra_style %}
   <style>
     .link-style {
       text-decoration: none;
@@ -13,15 +13,15 @@
       color: gray;
     }
   </style>
-{% endblock style %}
+{% endblock extra_style %}
 
 
-{% block title %}
-  PowerBlog- All Articles
-{% endblock title %}
+{% block extra_title %}
+  All Articles
+{% endblock extra_title %}
 
 
-{% block body %}
+{% block body_content %}
   <div class="container mt-5">
     {% for article in articles %}
       <div class="card border-info mb-3">
@@ -40,5 +40,5 @@
       </div>
     {% endfor %}
   </div>
-{% endblock body %}
+{% endblock body_content %}
 

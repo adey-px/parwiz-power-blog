@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 
 
-{% block style %}
-{% endblock style %}
+{% block extra_style %}
+{% endblock extra_style %}
 
 
-{% block title %}
+{% block extra_title %}
   Register Success
-{% endblock title %}
+{% endblock extra_title %}
 
 
-{% block body %}
+{% block body_content %}
   <div class="container text-center mt-5">
     <h3>Welcome, {{ new_account.username }}</h3>
     <p>Your account has been created successfully.</p>
@@ -20,4 +20,4 @@
       </a> to login
     </h5>
   </div>
-{% endblock body %}
+{% endblock body_content %}

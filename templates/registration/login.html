@@ -2,21 +2,21 @@
 {% load crispy_forms_tags %}
 
 
-{% block style %}
+{% block extra_style %}
   <style>
     .non-empty {
       color: orangered;
     }
   </style>
-{% endblock style %}
+{% endblock extra_style %}
 
 
-{% block title %}
+{% block extra_title %}
   Login
-{% endblock title %}
+{% endblock extra_title %}
 
 
-{% block body %}
+{% block body_content %}
   <div class="container">
     <h3 class="text-center mt-5">
       Login
@@ -46,7 +46,7 @@
       </div>
     </div>
   </div>
-{% endblock body %}
+{% endblock body_content %}
 
 
 <!-- 
