@@ -1,24 +1,15 @@
-""" 
-Optionally: 'from django.forms import ModelForm'
-in place of 'from django import forms'
+"""
+Two ways to create forms are .Form | .ModelForm
+.Form requires stating all the fields manually
+while .ModelForm uses built in django User model
+and to select the fields as string.
 """
 from django import forms
 from django.contrib.auth.models import User
 
 
-# User Login form
-class LoginForm(forms.Form):
-    """
-    User login with simple html form.
-    Indicate fields for form in login page.
-    """
-
-    username = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput)
-
-
-# User Registration logic
-class UserRegistration(forms.ModelForm):
+# Registration form
+class RegisterForm(forms.ModelForm):
     """
     User registration using django-crispy-forms
     using built in django User model
@@ -28,17 +19,28 @@ class UserRegistration(forms.ModelForm):
     conf_password = forms.CharField(
         label="Confirm Password", widget=forms.PasswordInput
     )
-
     class Meta:
         model = User
         fields = ("first_name", "last_name", "username", "email")
 
     def clean_conf_password(self):
-        checker = self.cleaned_data
-        if checker["password"] != checker["conf_password"]:
+        cd = self.cleaned_data
+        if cd["password"] != cd["conf_password"]:
             raise forms.ValidationError("Oops! passwords do not to match")
 
-        return checker["conf_password"]
+        return cd["conf_password"]
+
+
+# Login form
+class LoginForm(forms.Form):
+    """
+    User login with simple html form.
+    Indicate fields for form in login page.
+    """
+
+    # create fields manually
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
 
 
 """
@@ -47,5 +49,6 @@ and insert them within html form tags in templates
 
 Crispy forms have some built in properties like 
 .cleaned_data, .errors, .ValidationError, and
-built in form validation, etc  
+built in form validation, etc. They also come
+with styling by dafault.
 """

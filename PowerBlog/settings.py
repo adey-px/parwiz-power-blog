@@ -116,12 +116,6 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Optional: If use djnago built in login
-# Required vars with appr view names
-LOGIN_REDIRECT_URL = 'article_page'
-LOGIN_URL = 'login'
-LOGOUT_URL = 'logout'
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
@@ -132,6 +126,14 @@ STATIC_URL = "/static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+
 # Crispy-forms and Bootstrap5 config
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+
+# Optional: If use django built in login
+# Required vars with appr view names
+LOGIN_REDIRECT_URL = 'article_page'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'

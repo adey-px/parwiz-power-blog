@@ -4,7 +4,7 @@
 
 {% block style %}
   <style>
-    .none-empty {
+    .non-empty {
       color: orangered;
     }
   </style>
@@ -12,19 +12,19 @@
 
 
 {% block title %}
-  Login Page
+  Login
 {% endblock title %}
 
 
 {% block body %}
   <div class="container">
     <h3 class="text-center mt-5">
-      User Login
+      Login
     </h3>
 
     {% if form.errors %}
-      <p class="none-empty">
-        Oops! required fields can't be empty
+      <p class="non-empty text-center">
+        Required fields can't be empty
       </p>
     {% else %}
       <p class="text-center">
@@ -50,6 +50,7 @@
 
 
 <!-- 
-Note that crispy forms have built in
-form.errors to handle field errors
+crispy forms have built in form.errors 
+to handle field errors. form here is
+the form object from views.py
 -->

@@ -1,11 +1,12 @@
-from django.shortcuts import render, HttpResponse, get_object_or_404
+from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
 from .models import Article
-from .forms import LoginForm, UserRegistration
+from .forms import RegisterForm, LoginForm
 from django.contrib.auth import authenticate, login
 
 
-# All articles page
-def article_page(request):
+# Articles page
+def articles_page(request):
     """
     Get all articles in db to display on page
     """
@@ -13,7 +14,7 @@ def article_page(request):
     return render(request, "article/articles.html", {"articles": articles})
 
 
-# Each article detail
+# Article detail
 def article_detail(request, slug):
     """
     Get and display detail of each article in db.
@@ -32,22 +33,20 @@ def register(request):
     is false not to save user until set_password.
     """
     if request.method == "POST":
-        register_form = UserRegistration(request.POST)
+        form = RegisterForm(request.POST)
 
-        if register_form.is_valid():
-            new_account = register_form.save(commit=False)
-            new_account.set_password(register_form.cleaned_data["conf_password"])
-            new_account.save()
+        if form.is_valid():
+            new_user = form.save(commit=False)
+            new_user.set_password(form.cleaned_data["conf_password"])
+            new_user.save()
 
-            return render(
-                request, "register-done.html", {"register_form": register_form}
-            )
+            return render(request, "auth/register-done.html", {"form": form})
     else:
-        register_form = UserRegistration()
-    return render(request, "register.html", {"register_form": register_form})
+        form = RegisterForm()
+    return render(request, "auth/register-form.html", {"form": form})
 
 
-# User Login
+# Login & Authentication
 def user_login(request):
     """
     User login with html form defined in forms.py
@@ -57,16 +56,19 @@ def user_login(request):
     """
     if request.method == "POST":
         form = LoginForm(request.POST)
+
+        # if form is valid, clean data from its fields
         if form.is_valid():
-            checker = form.cleaned_data
+            cd = form.cleaned_data
             user = authenticate(
-                request, username=checker["username"], password=checker["password"]
+                request, username=cd["username"], password=cd["password"]
             )
+            # allow login, if details are valid
             if user is not None:
                 login(request, user)
                 return HttpResponse("Success, you are logged in")
         else:
-            return HttpResponse("Oops! incorrect username and/or password")
+            return HttpResponse("Incorrect username and/or password")
     else:
         form = LoginForm()
-    return render(request, "login-page.html", {"form": form})
+    return render(request, "auth/login.html", {"form": form})

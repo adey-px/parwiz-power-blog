@@ -6,7 +6,7 @@
 
 
 {% block title %}
-  Register - Success
+  Register Success
 {% endblock title %}
 
 
@@ -15,10 +15,9 @@
     <h3>Welcome, {{ new_account.username }}</h3>
     <p>Your account has been created successfully.</p>
     <h5 class='mt-5'> Click 
-      <a href="{% url 'user_login' %}">
+      <a href="{% url 'login' %}">
         here
       </a> to login
     </h5>
- 
   </div>
 {% endblock body %}
