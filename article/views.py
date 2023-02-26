@@ -12,9 +12,11 @@ from .models import Article
 from .forms import CreateArticleForm, LoginForm, RegisterForm, UpdateArticleForm
 from django.contrib.auth import authenticate, login
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.decorators import login_required
 
 
 # Create article
+@login_required
 def create_article(request):
     """
     View to create new article
@@ -73,6 +75,7 @@ def article_detail(request, slug):
 
 
 # Update article
+@login_required
 def update_article(request, slug):
     """
     View to update article
@@ -88,6 +91,7 @@ def update_article(request, slug):
 
 
 # Delete article
+@login_required
 def delete_article(request, slug):
     """
     View to delete article
