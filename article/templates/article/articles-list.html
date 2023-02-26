@@ -39,6 +39,9 @@
         </div>
       </div>
     {% endfor %}
+
+    <div class="mt-4">
+      {% include 'article/pagination.html' with page=articles %}
+    </div>
   </div>
 {% endblock body_content %}
-

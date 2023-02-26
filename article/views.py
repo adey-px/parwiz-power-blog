@@ -11,6 +11,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from .models import Article
 from .forms import CreateArticleForm, LoginForm, RegisterForm, UpdateArticleForm
 from django.contrib.auth import authenticate, login
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 # Create article
@@ -38,11 +39,26 @@ def create_article(request):
 # Articles list
 def articles_list(request):
     """
-    Get all articles from db, 
-    last in first out 
+    Get all articles from db,
+    last in first out, in pages.
     """
     articles = Article.objects.all()[::-1]
-    return render(request, "article/articles-list.html", {"articles": articles})
+    paginator = Paginator(articles, 3)
+    page = request.GET.get("page")
+
+    try:
+        pagination = paginator.page(page)
+
+    except PageNotAnInteger:
+        pagination = paginator.page(1)
+
+    except EmptyPage:
+        pagination = paginator.page(paginator.num_pages)
+
+    return render(
+        request, "article/articles-list.html", {"articles": pagination, "page": page}
+    )
+
 
 
 # Article detail
@@ -78,7 +94,7 @@ def delete_article(request, slug):
     """
     article = get_object_or_404(Article, slug=slug)
     article.delete()
-    return redirect('articles-list')
+    return redirect("articles-list")
 
 
 # Custom Registration
