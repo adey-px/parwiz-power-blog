@@ -2,6 +2,7 @@
 
 
 {% block extra_title %}
+  {{article.title}}
 {% endblock extra_title %}
 
 
@@ -17,5 +18,16 @@
     </h6>
     <hr>
     <p>{{ article.description }}</p>
+
+    {% if request.user == article.author %}
+      <a href="{% url 'update-article' article.slug %}"
+        class="btn btn-danger mx-3 mt-3">
+        Update
+      </a>
+      <a href="{% url 'delete-article' article.slug %}"
+        class="btn btn-danger mx-3 mt-3">
+        Delete
+      </a>
+    {% endif %}
   </div>
 {% endblock body_content %}

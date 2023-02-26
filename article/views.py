@@ -1,17 +1,48 @@
+"""
+Forms imported from forms.py may be optionally
+loaded with crispy tags in templates. Crispy
+forms have additional benefits when used.
+
+Custom Login view won't be used if django built-in
+LoginView is used. Refer urls.py for more details.
+"""
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404
 from .models import Article
-from .forms import RegisterForm, LoginForm
+from .forms import CreateArticleForm, LoginForm, RegisterForm, UpdateArticleForm
 from django.contrib.auth import authenticate, login
 
 
-# Articles page
-def articles_page(request):
+# Create article
+def create_article(request):
     """
-    Get all articles in db to display on page
+    View to create new article
     """
-    articles = Article.objects.all().order_by("published")
-    return render(request, "article/articles.html", {"articles": articles})
+    form = CreateArticleForm(request.POST)
+
+    # link auth user to article, save
+    if request.method == "POST":
+        if form.is_valid():
+            article = form.save(commit=False)
+            article.author = request.user
+            article.save()
+
+            # redirect to home page
+            return redirect("articles-list")
+
+    else:
+        form = CreateArticleForm(request.POST)
+    return render(request, "article/article-new.html", {"form": form})
+
+
+# Articles list
+def articles_list(request):
+    """
+    Get all articles from db, 
+    last in first out 
+    """
+    articles = Article.objects.all()[::-1]
+    return render(request, "article/articles-list.html", {"articles": articles})
 
 
 # Article detail
@@ -25,7 +56,32 @@ def article_detail(request, slug):
     return render(request, "article/article-detail.html", {"article": article})
 
 
-# User Registration
+# Update article
+def update_article(request, slug):
+    """
+    View to update article
+    """
+    article = get_object_or_404(Article, slug=slug)
+    form = UpdateArticleForm(request.POST or None, instance=article)
+
+    if form.is_valid():
+        article.save()
+        return redirect("articles-list")
+
+    return render(request, "article/article-update.html", {"form": form})
+
+
+# Delete article
+def delete_article(request, slug):
+    """
+    View to delete article
+    """
+    article = get_object_or_404(Article, slug=slug)
+    article.delete()
+    return redirect('articles-list')
+
+
+# Custom Registration
 def register(request):
     """
     Register user with crispy form defined in
@@ -40,13 +96,13 @@ def register(request):
             new_user.set_password(form.cleaned_data["conf_password"])
             new_user.save()
 
-            return render(request, "auth/register-done.html", {"form": form})
+            return render(request, "custom/register-done.html", {"form": form})
     else:
         form = RegisterForm()
-    return render(request, "auth/register-form.html", {"form": form})
+    return render(request, "custom/register-form.html", {"form": form})
 
 
-# Login & Authentication
+# Custom Login
 def user_login(request):
     """
     User login with html form defined in forms.py
@@ -71,4 +127,4 @@ def user_login(request):
             return HttpResponse("Incorrect username and/or password")
     else:
         form = LoginForm()
-    return render(request, "auth/login.html", {"form": form})
+    return render(request, "custom/login.html", {"form": form})

@@ -9,7 +9,8 @@ from django.contrib.auth.models import User
 
 # Custom Article model
 class Article(models.Model):
-    """Article model with slug included for use
+    """
+    Article model with slug included for use
     in signals, views, urls and article-detail page.
     Slug is passed as title in article-detail page.
     """
@@ -17,7 +18,7 @@ class Article(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     slug = models.SlugField(max_length=50, unique=True)
-    published = models.DateTimeField(auto_now_add=False)
+    published = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     # show each article by title in admin

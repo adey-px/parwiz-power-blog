@@ -132,8 +132,8 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 
-# Optional: If use django built in login
+# If use django built-in LoginView
 # Required vars with appr view names
-LOGIN_REDIRECT_URL = 'article_page'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'articles-list'

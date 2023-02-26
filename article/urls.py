@@ -1,7 +1,7 @@
 """ 
 Ensure to pass exact string used as path name here 
 to the href link as url to open the template.
-Refer to articles.html href that opens article_detail
+Refer to href link in articles-list.html 
 """
 from django.urls import path
 from .views import *
@@ -13,8 +13,11 @@ from django.contrib.auth.views import (
 )
 
 urlpatterns = [
-    path("", articles_page, name="article_page"),
-    path("article/<slug:slug>/", article_detail, name="article_detail"),
+    path("articles-list/", articles_list, name="articles-list"),
+    path("article/<slug:slug>/", article_detail, name="article-detail"),
+    path("create-article/", create_article, name="create-article"),
+    path("update-article/<slug:slug>/", update_article, name="update-article"),
+    path("delete-article/<slug:slug>/", delete_article, name="delete-article"),
     path("register/", register, name="register"),
     # path("login/", user_login, name="user_login"),
     # 

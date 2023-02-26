@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block extra_style %}
+  <style>
+    .article {
+      margin: auto;
+      width: 700px;
+    }
+  </style>
+{% endblock extra_style %}
+
+
+{% block extra_title %}
+  Update Article
+{% endblock extra_title %}
+
+
+{% block body_content %}
+  <div class="container mt-5">
+    <div class="text-center">
+      <h3>Add New Article</h3>
+      <p>Fill this form to create new artcile</p>
+    </div>
+
+    <form action="" method="post" novalidate>
+       {% csrf_token %}
+      {{ form | crispy }}
+     
+      <input type="submit" value="Update Article" 
+        class="btn btn-success">
+    </form>
+  </div>
+{% endblock body_content %}

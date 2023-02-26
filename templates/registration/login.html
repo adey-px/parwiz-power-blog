@@ -35,12 +35,11 @@
     <div class="row">
       <div class="col-md-6 offset-md-3">
         <form action="" method="post" novalidate>
-          {{ form | crispy }}
           {% csrf_token %}
+          {{ form | crispy }}
           <div class="d-grid gap-2 col-12 mx-auto">
             <input type="submit" value="Login" 
-              class="btn btn-success"
-            >
+              class="btn btn-success">
           </div>
         </form>
       </div>
