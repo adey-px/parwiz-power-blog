@@ -3,7 +3,7 @@ Ensure to pass exact string used as path name here
 to the href link as url to open the template.
 Refer to href link in articles-list.html 
 """
-from django.urls import path
+from django.urls import include, path
 from .views import *
 from django.contrib.auth.views import (
     LoginView,
@@ -20,15 +20,17 @@ urlpatterns = [
     path("delete-article/<slug:slug>/", delete_article, name="delete-article"),
     path("register/", register, name="register"),
     # path("login/", user_login, name="user_login"),
-    # 
+    #
     path("login/", LoginView.as_view(), name="login"),
     path("logout/", LogoutView.as_view(), name="logout"),
     path("password-change/", PasswordChangeView.as_view(), name="password-change"),
     path(
-        "password-change/done",
+        "password-change/done/",
         PasswordChangeDoneView.as_view(),
         name="password_change_done",
     ),
+    #
+    # path('social-auth', include('social_django,urls', namespace='social'))
 ]
 
 """
