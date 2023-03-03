@@ -34,7 +34,7 @@
     
     <!-- login form -->
     <div class="row">
-      <div class="col-md-6 offset-md-3">
+      <div class="col-md-3 offset-md-3 position-relative">
         <form action="" method="post" novalidate>
           {% csrf_token %}
           {{ form | crispy }}
@@ -43,36 +43,38 @@
               class="btn btn-success">
           </div>
         </form>
-
-        <!-- login social media -->
-        <div class="row mt-4">
-          <div class="col">
-            <button class="btn btn-primary">
-              <a href="{% url 'social:begin' 'facebook' %}" 
-                class="link-style">
-                Sign In with Facebook
-              </a>
-            </button>
-          </div>
-          <div class="col">
-            <button class="btn btn-danger">
-              <a href="{% url 'social:begin' 'github' %}" 
-                class="link-style">
-                Sign In with GitHub
-              </a>
-            </button>
-          </div>
-          <div class="col">
-            <button class="btn btn-warning">
-              <a href="{% url 'social:begin' 'linkedin-outh2' %}" class="link-style">
-                Sign In with LinkedIn
-              </a>
-            </button>
-          </div>
-        </div>
-        
       </div>
-    </div>
+   
+
+      <!-- login social media -->
+      <div class="col-md-3 offset-md-3 position-relative">
+        <div class="card">
+          <ul class="list-group list-group-flush">
+            <a href="">
+              <li class="list-group-item text-center">
+                An item
+              </li>
+            </a>
+            <a href="">
+              <li class="list-group-item text-center">
+                An item
+              </li>
+            </a>
+            <a href="">
+              <li class="list-group-item text-center">
+                An item
+              </li>
+            </a>
+            <a href="">
+              <li class="list-group-item text-center">
+                An item
+              </li>
+            </a>
+          </ul>
+        </div>
+      </div>
+    <div>
+  
   </div>
 {% endblock body_content %}
 
