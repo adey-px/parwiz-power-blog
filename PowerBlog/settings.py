@@ -9,45 +9,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 from decouple import config
-import requests
-
-
-# Get the private IP for Elastic Beanstalk
-def is_ec2_linux():
-    if os.path.isfile("/sys/hypervisor/uuid"):
-        with open("/sys/hypervisor/uuid") as f:
-            uuid = f.read()
-            return uuid.startswith("ec2")
-    return False
-
-
-#
-def get_token():
-    headers = {
-        "X-aws-ec2-metadata-token-ttl-seconds": "21600",
-    }
-    response = requests.put("http://169.254.169.254/latest/api/token", headers=headers)
-    return response.text
-
-
-#
-def get_linux_ec2_private_ip():
-    if not is_ec2_linux():
-        return None
-    try:
-        token = get_token()
-        headers = {
-            "X-aws-ec2-metadata-token": f"{token}",
-        }
-        response = requests.get(
-            "http://169.254.169.254/latest/meta-data/local-ipv4", headers=headers
-        )
-        return response.text
-    except:
-        return None
-    finally:
-        if response:
-            response.close()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -59,17 +20,11 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG")
 
-
 # Update with Private IP
 ALLOWED_HOSTS = [
     "localhost",
     "powerblog-env.eba-2kpd8mtr.us-east-1.elasticbeanstalk.com",
 ]
-
-private_ip = get_linux_ec2_private_ip()
-if private_ip:
-    ALLOWED_HOSTS.append(private_ip)
-
 
 # Application definition
 INSTALLED_APPS = [

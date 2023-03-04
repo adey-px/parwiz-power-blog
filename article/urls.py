@@ -13,7 +13,7 @@ from django.contrib.auth.views import (
 )
 
 urlpatterns = [
-    path("articles-list/", articles_list, name="articles-list"),
+    path("", articles_list, name="articles-list"),
     path("article/<slug:slug>/", article_detail, name="article-detail"),
     path("create-article/", create_article, name="create-article"),
     path("update-article/<slug:slug>/", update_article, name="update-article"),
