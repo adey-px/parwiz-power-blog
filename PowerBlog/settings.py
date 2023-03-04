@@ -23,7 +23,7 @@ DEBUG = False
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    "http://powerblog-env.eba-gwm5e5d6.us-east-1.elasticbeanstalk.com/",
+    "powerblog-env.eba-gwm5e5d6.us-east-1.elasticbeanstalk.com",
 ]
 
 # Application definition
