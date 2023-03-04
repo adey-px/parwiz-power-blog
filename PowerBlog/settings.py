@@ -19,10 +19,7 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG")
 
-ALLOWED_HOSTS = [
-    "powerblog-env.eba-2kpd8mtr.us-east-1.elasticbeanstalk.com",
-    "localhost",
-]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
