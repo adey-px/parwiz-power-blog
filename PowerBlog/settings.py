@@ -7,8 +7,42 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
+import requests
 from pathlib import Path
 
+
+def is_ec2_linux():
+    if os.path.isfile("/sys/hypervisor/uuid"):
+        with open("/sys/hypervisor/uuid") as f:
+            uuid = f.read()
+            return uuid.startswith("ec2")
+    return False
+
+def get_token():
+    headers = {
+        'X-aws-ec2-metadata-token-ttl-seconds': '21600',
+    }
+    response = requests.put('http://169.254.169.254/latest/api/token', headers=headers)
+    return response.text
+
+
+def get_linux_ec2_private_ip():
+    if not is_ec2_linux():
+        return None
+    try:
+        token = get_token()
+        headers = {
+            'X-aws-ec2-metadata-token': f"{token}",
+        }
+        response = requests.get('http://169.254.169.254/latest/meta-data/local-ipv4', headers=headers)
+        return response.text
+    except:
+        return None
+    finally:
+        if response:
+            response.close()
+
+# Other settings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,10 +53,7 @@ SECRET_KEY = "django-insecure-+*=bcsy&=&^2uftiw6566lw9n!ncsub$pex"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [
-    "powerblog-env.eba-gwm5e5d6.us-east-1.elasticbeanstalk.com",
-    "localhost",
-]
+ALLOWED_HOSTS = ['Powerblog-env.eba-gwm5e5d6.us-east-1.elasticbeanstalk.com']
 
 # Application definition
 INSTALLED_APPS = [
