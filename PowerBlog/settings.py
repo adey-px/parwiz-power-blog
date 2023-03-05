@@ -20,8 +20,8 @@ SECRET_KEY = "django-insecure-+*=bcsy&=&^2uftiw6566lw9n!ncsub$pex"
 DEBUG = False
 
 ALLOWED_HOSTS = [
+    "powerblog-env.eba-gwm5e5d6.us-east-1.elasticbeanstalk.com",
     "localhost",
-    "Powerblog-env.eba-gwm5e5d6.us-east-1.elasticbeanstalk.com",
 ]
 
 # Application definition
