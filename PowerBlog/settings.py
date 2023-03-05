@@ -73,29 +73,38 @@ WSGI_APPLICATION = "PowerBlog.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if "RDS_HOSTNAME" in os.environ:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.mysql",
-            "NAME": os.environ["RDS_DB_NAME"],
-            "USER": os.environ["RDS_USERNAME"],
-            "PASSWORD": os.environ["RDS_PASSWORD"],
-            "HOST": os.environ["RDS_HOSTNAME"],
-            "PORT": os.environ["RDS_PORT"],
-        }
-    }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.mysql",
-            "HOST": config("HOST"),
-            "PORT": config("PORT"),
-            "NAME": config("NAME"),
-            "USER": config("USER"),
-            "PASSWORD": config("PASSWORD"),
-        }
-    }
+# if "RDS_HOSTNAME" in os.environ:
+#     DATABASES = {
+#         "default": {
+#             "ENGINE": "django.db.backends.mysql",
+#             "HOST": os.environ["RDS_HOSTNAME"],
+#             "PORT": os.environ["RDS_PORT"],
+#             "NAME": os.environ["RDS_DB_NAME"],
+#             "USER": os.environ["RDS_USERNAME"],
+#             "PASSWORD": os.environ["RDS_PASSWORD"],
+#         }
+#     }
+# else:
+#     DATABASES = {
+#         "default": {
+#             "ENGINE": "django.db.backends.mysql",
+#             "HOST": config("HOST"),
+#             "PORT": config("PORT"),
+#             "NAME": config("NAME"),
+#             "USER": config("USER"),
+#             "PASSWORD": config("PASSWORD"),
+#         }
+#     }
 
+DATABASES = {
+    "default": {
+        "HOST": "powerblog.c5rnezem5bns.us-east-1.rds.amazonaws.com",
+        "PORT": 3306,
+        "NAME": "powerblog",
+        "USER": "admin",
+        "PASSWORD": "adeyking1",
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
