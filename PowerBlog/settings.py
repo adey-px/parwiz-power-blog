@@ -17,11 +17,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-+*=bcsy&=&^2uftiw6566lw9n!ncsub$pex"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "localhost",
-    "powerblog-env.eba-gwm5e5d6.us-east-1.elasticbeanstalk.com",
+    "127.0.0.0",
+    "powerblog-env.eba-gwm5e5d6.us-east-1.elasticbeanstalk.com"
 ]
 
 # Application definition
