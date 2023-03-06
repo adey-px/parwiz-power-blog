@@ -73,11 +73,11 @@ WSGI_APPLICATION = "PowerBlog.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "HOST": "powerblog.c5rnezem5bns.us-east-1.rds.amazonaws.com",
-        "PORT": 3306,
         "NAME": "powerblog",
         "USER": "admin",
         "PASSWORD": "adeyking1",
+        "HOST": "powerblog.c5rnezem5bns.us-east-1.rds.amazonaws.com",
+        "PORT": 3306,
     }
 }
 
