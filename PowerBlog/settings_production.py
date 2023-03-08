@@ -35,7 +35,7 @@ private_ip = get_linux_ec2_private_ip()
 if private_ip:
     ALLOWED_HOSTS += [
         private_ip,
-        "power-blog-env.eba-zw4iudhm.us-west-2.elasticbeanstalk.com ",
+        "power-blog-env.eba-zw4iudhm.us-west-2.elasticbeanstalk.com",
     ]
 
 # Other production overrides
